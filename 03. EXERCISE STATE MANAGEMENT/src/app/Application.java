@@ -18,8 +18,19 @@ public class Application {
         List<String> validUrls = getValidUrls();
         String request = getRequest();
 
-        System.out.println(request);
         HttpRequest httpRequest = new HttpRequestImpl(request);
+
+        httpRequest.getCookies()
+                .forEach(c -> System.out.println(String.format("%s <-> %s"
+                , c.getKey(), c.getValue())));
+    }
+
+    private static boolean urlIsValid(List<String> validUrls, HttpRequest httpRequest) {
+        if (validUrls.contains(httpRequest.getRequestUrl())) {
+            return true;
+        }
+
+        return false;
     }
 
     private static List<String> getValidUrls() throws IOException {

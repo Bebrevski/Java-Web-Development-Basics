@@ -1,9 +1,6 @@
 package app.http;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class HttpRequestImpl implements HttpRequest {
 
@@ -12,6 +9,7 @@ public class HttpRequestImpl implements HttpRequest {
     private Map<String, String> headers;
     private Map<String, String> bodyParams;
     private boolean isResource;
+    private List<HttpCookie> cookies;
 
     public HttpRequestImpl(String request) {
         this.init(request);
@@ -22,14 +20,36 @@ public class HttpRequestImpl implements HttpRequest {
         this.setRequestUrl(request.split("\\s+")[1]);
         this.headers = new LinkedHashMap<>();
         this.bodyParams = new LinkedHashMap<>();
+        this.cookies = new ArrayList<>();
 
-        Arrays.stream(request.split(System.lineSeparator()))
+        String[] requestParams = request.split(System.lineSeparator());
+        Arrays.stream(requestParams)
                 .skip(1)
+                .filter(headerKvp -> headerKvp.contains(": "))
                 .forEach(headerKvp -> {
                     String[] header = headerKvp.split(": ");
-
                     this.addHeader(header[0], header[1]);
                 });
+
+        if (!requestParams[requestParams.length - 1].isEmpty()) {
+            Arrays.stream(requestParams[requestParams.length - 1].split("&"))
+                    .forEach(bodyKvp -> {
+                        String[] body = bodyKvp.split("=");
+                        this.addBodyParams(body[0], body[1]);
+                    });
+        }
+
+        if (this.headers.containsKey("Cookie")) {
+            String cookie = this.headers.get("Cookie");
+            Arrays.stream(cookie.split("; "))
+                    .forEach(ckvp -> {
+                        String[] cookieParams = ckvp.split("=");
+                        HttpCookie httpCookie = new HttpCookieImpl(cookieParams[0], cookieParams[1]);
+
+                        this.addCookie(httpCookie);
+                    });
+
+        }
     }
 
     @Override
@@ -53,8 +73,13 @@ public class HttpRequestImpl implements HttpRequest {
     }
 
     @Override
+    public List<HttpCookie> getCookies() {
+        return Collections.unmodifiableList(this.cookies);
+    }
+
+    @Override
     public boolean isResource() {
-        return this.isResource;
+        return this.getRequestUrl().contains(".");
     }
 
     @Override
@@ -75,5 +100,10 @@ public class HttpRequestImpl implements HttpRequest {
     @Override
     public void addBodyParams(String key, String value) {
         this.bodyParams.put(key, value);
+    }
+
+    @Override
+    public void addCookie(HttpCookie cookie) {
+        this.cookies.add(cookie);
     }
 }

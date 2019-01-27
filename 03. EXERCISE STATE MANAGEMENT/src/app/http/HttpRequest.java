@@ -1,5 +1,6 @@
 package app.http;
 
+import java.util.List;
 import java.util.Map;
 
 public interface HttpRequest {
@@ -11,6 +12,8 @@ public interface HttpRequest {
 
     Map<String, String> getBodyParams();
 
+    List<HttpCookie> getCookies();
+
     boolean isResource();
 
     void setMethod(String method);
@@ -20,4 +23,6 @@ public interface HttpRequest {
     void addHeader(String key, String value);
 
     void addBodyParams(String key, String value);
+
+    void addCookie(HttpCookie cookie);
 }

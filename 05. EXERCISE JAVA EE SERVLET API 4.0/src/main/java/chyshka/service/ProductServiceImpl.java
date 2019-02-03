@@ -7,6 +7,8 @@ import chyshka.repository.ProductRepository;
 import chyshka.util.ModelMapper;
 
 import javax.inject.Inject;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductServiceImpl implements ProductService {
 
@@ -25,5 +27,28 @@ public class ProductServiceImpl implements ProductService {
         product.setType(Type.valueOf(productServiceModel.getType().toUpperCase()));
 
         this.productRepository.save(product);
+    }
+
+    @Override
+    public List<ProductServiceModel> findAllProducts() {
+        return this.productRepository.findAll().stream()
+                .map(product -> {
+                    ProductServiceModel productServiceModel = this.modelMapper.map(product, ProductServiceModel.class);
+                    productServiceModel.setType(product.getType().toString());
+
+                    return productServiceModel;
+                })
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public ProductServiceModel findProductByName(String name) {
+        Product product = this.productRepository.findByName(name);
+        ProductServiceModel productServiceModel = this.modelMapper
+                .map(product, ProductServiceModel.class);
+
+        productServiceModel.setType(product.getType().toString());
+
+        return productServiceModel;
     }
 }

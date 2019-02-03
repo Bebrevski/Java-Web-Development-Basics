@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Chyshka</title>
+    <title>Details</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
@@ -17,34 +17,33 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
-        <main>
-            <div class="jumbotron">
-                <div class="row">
-                    <div class="col col-md-12 d-flex justify-content-center">
-                        <h1>Welcome to Chyshka application</h1>
-                    </div>
-                </div>
-                <hr/>
-                <div class="row">
-                    <div class="col col-md-12 d-flex justify-content-center">
-                        <p>Check our products below</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col col-md-12 d-flex justify-content-center">
-                        <ul>
-                            {{listItems}}
-                        </ul>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col col-md-12 d-flex justify-content-center">
-                        <a href="/products/create" class="btn btn-primary">Create product</a>
-                    </div>
+<div class="container">
+    <main>
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col col-md-12 d-flex justify-content-center">
+                    <h1>{{productName}}</h1>
                 </div>
             </div>
-        </main>
-    </div>
+            <hr/>
+            <div class="row">
+                <div class="col col-md-12 d-flex justify-content-center">
+                    <p>{{productDescription}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-md-12 d-flex justify-content-center">
+                    {{productType}}
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col col-md-12 d-flex justify-content-center">
+                    <a href="/">Back to Home.</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
 </body>
 </html>

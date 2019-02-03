@@ -37,12 +37,10 @@ public class CatAllServlet extends HttpServlet {
 
             ((Map<String, Cat>) req.getSession().getAttribute("cats"))
                     .values()
-                    .stream()
                     .forEach(c -> {
                         sb
-                                .append(String.format("<a href=\"/cats/profile?catName=%s\">%s</a>"
-                                        , c.getName(), c.getName()))
-                                .append(System.lineSeparator());
+                                .append(String.format("<a href=\"/cats/profile?catName=%s\">%s</a><br/>"
+                                        , c.getName(), c.getName()));
 
                         htmlFileContent[0] = htmlFileContent[0].replace("{{allCats}}", sb.toString().trim());
                     });

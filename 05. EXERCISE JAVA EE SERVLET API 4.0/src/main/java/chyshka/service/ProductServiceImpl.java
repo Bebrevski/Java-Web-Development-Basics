@@ -22,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void saveProduct(ProductServiceModel productServiceModel) {
         Product product = this.modelMapper.map(productServiceModel, Product.class);
-        product.setType(Type.valueOf(productServiceModel.getType()));
+        product.setType(Type.valueOf(productServiceModel.getType().toUpperCase()));
 
         this.productRepository.save(product);
     }

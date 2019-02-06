@@ -6,6 +6,8 @@ import metube.repository.TubeRepository;
 import metube.util.ModelMapper;
 
 import javax.inject.Inject;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TubeServiceImpl implements TubeService {
 
@@ -27,8 +29,15 @@ public class TubeServiceImpl implements TubeService {
     public TubeServiceModel findTubeByName(String name) {
         Tube tube = this.tubeRepository.findByName(name).orElse(null);
 
-      //TODO - Validation if entity is null
+        //TODO - Validation if entity is null
 
         return this.modelMapper.map(tube, TubeServiceModel.class);
+    }
+
+    @Override
+    public List<TubeServiceModel> findAllTubes() {
+        return this.tubeRepository.findAll().stream()
+                .map(t -> this.modelMapper.map(t, TubeServiceModel.class))
+                .collect(Collectors.toList());
     }
 }

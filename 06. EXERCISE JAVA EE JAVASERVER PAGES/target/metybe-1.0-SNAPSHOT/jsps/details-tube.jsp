@@ -35,7 +35,7 @@
                 </div>
                 <div class="row">
                     <div class="col col-md-12 d-flex justify-content-center">
-                        <a href="/">Back to Home.</a>
+                        <a href="/tubes/all">Back to all Tubes.</a>
                     </div>
                 </div>
             </div>

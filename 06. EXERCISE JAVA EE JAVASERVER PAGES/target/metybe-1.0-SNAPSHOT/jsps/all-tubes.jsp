@@ -26,11 +26,16 @@
             <hr/>
             <div class="row">
                 <div class="col col-md-12 d-flex justify-content-center">
+                    <%if (tubes.size() == 0) {%>
+                        <p>No Tubes - <a href="/tubes/create">Create Some</a>!</p>
+                    <%} else{%>
                     <ul>
                         <%for (AllTubesViewModel tube : tubes) {%>
-                            <li><a href="/tubes/details?name=<%=tube.getName()%>"><%=tube.getName()%></a></li>
+                        <li><a href="/tubes/details?name=<%=tube.getName()%>"><%=tube.getName()%>
+                        </a></li>
                         <%}%>
                     </ul>
+                    <%}%>
                 </div>
             </div>
             <div class="row">

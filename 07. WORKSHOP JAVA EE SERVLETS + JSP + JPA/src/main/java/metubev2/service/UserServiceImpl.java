@@ -3,25 +3,25 @@ package metubev2.service;
 import metubev2.domain.entity.User;
 import metubev2.domain.models.service.UserServiceModel;
 import metubev2.repository.UserRepository;
-import metubev2.util.Mapper;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.modelmapper.ModelMapper;
 
 import javax.inject.Inject;
 
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final Mapper mapper;
+    private final ModelMapper modelMapper;
 
     @Inject
-    public UserServiceImpl(UserRepository userRepository, Mapper mapper) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper) {
         this.userRepository = userRepository;
-        this.mapper = mapper;
+        this.modelMapper = modelMapper;
     }
 
     @Override
     public boolean registerUser(UserServiceModel userServiceModel) {
-        User user = this.mapper.map(userServiceModel, User.class);
+        User user = this.modelMapper.map(userServiceModel, User.class);
 
         user.setPassword(DigestUtils.sha256Hex(userServiceModel.getPassword()));
 
@@ -43,5 +43,16 @@ public class UserServiceImpl implements UserService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public UserServiceModel findUserByUsername(String username) {
+        User user = this.userRepository.findByUsername(username);
+
+        if (user == null) {
+            throw new IllegalArgumentException("Something went wrong in UserServiceImpl class, findUserByUsername method!");
+        }
+
+        return this.modelMapper.map(user, UserServiceModel.class);
     }
 }

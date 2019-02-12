@@ -17,6 +17,7 @@ public class UserRegisterFilter implements Filter {
 
         if(request.getMethod().toLowerCase().equals("post")) {
             UserRegisterBindingModel userRegisterBindingModel = new UserRegisterBindingModel();
+
             userRegisterBindingModel.setUsername(request.getParameter("username"));
             userRegisterBindingModel.setPassword(request.getParameter("password"));
             userRegisterBindingModel.setConfirmPassword(request.getParameter("confirmPassword"));

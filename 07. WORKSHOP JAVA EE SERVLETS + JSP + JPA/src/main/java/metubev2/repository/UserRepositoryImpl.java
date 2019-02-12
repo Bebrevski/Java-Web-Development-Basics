@@ -2,17 +2,17 @@ package metubev2.repository;
 
 import metubev2.domain.entity.User;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import java.util.List;
 
 public class UserRepositoryImpl implements UserRepository {
-    private EntityManager entityManager;
 
-    public UserRepositoryImpl() {
-        this.entityManager = Persistence
-                .createEntityManagerFactory("metubev2")
-                .createEntityManager();
+    private final EntityManager entityManager;
+
+    @Inject
+    public UserRepositoryImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     @Override
@@ -74,6 +74,27 @@ public class UserRepositoryImpl implements UserRepository {
                     "WHERE u.username = :username AND u.password = :password", User.class)
                     .setParameter("username", username)
                     .setParameter("password", password)
+                    .getSingleResult();
+
+            return user;
+        } catch (Exception e) {
+            return null;
+        } finally {
+            this.entityManager.getTransaction().commit();
+        }
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        this.entityManager.getTransaction().begin();
+
+        User user;
+        try {
+            user = this.entityManager.createQuery("" +
+                    "SELECT u " +
+                    "FROM User AS u " +
+                    "WHERE u.username = :username", User.class)
+                    .setParameter("username", username)
                     .getSingleResult();
 
             return user;

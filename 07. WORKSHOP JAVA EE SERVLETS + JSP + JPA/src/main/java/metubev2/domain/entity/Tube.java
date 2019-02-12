@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "tubes")
 public class Tube extends BaseEntity {
+
     private String title;
     private String author;
     private String description;
@@ -15,45 +16,45 @@ public class Tube extends BaseEntity {
     public Tube() {
     }
 
-    @Column(name = "title", nullable = false, updatable = true)
+    @Column(name = "title", nullable = false)
     public String getTitle() {
-        return this.title;
+        return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    @Column(name = "author", nullable = false, updatable = true)
+    @Column(name = "author", nullable = false)
     public String getAuthor() {
-        return this.author;
+        return author;
     }
 
     public void setAuthor(String author) {
         this.author = author;
     }
 
-    @Column(name = "description", updatable = true)
+    @Column(name = "description")
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    @Column(name = "youtube_id", nullable = false, updatable = false, unique = true)
+    @Column(name = "youtube_id", nullable = false, updatable = false)
     public String getYoutubeId() {
-        return this.youtubeId;
+        return youtubeId;
     }
 
     public void setYoutubeId(String youtubeId) {
         this.youtubeId = youtubeId;
     }
 
-    @Column(name = "views", nullable = false, updatable = true)
+    @Column(name = "views")
     public long getViews() {
-        return this.views;
+        return views;
     }
 
     public void setViews(long views) {
@@ -61,9 +62,9 @@ public class Tube extends BaseEntity {
     }
 
     @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "uploader", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "uploader", referencedColumnName = "id")
     public User getUploader() {
-        return this.uploader;
+        return uploader;
     }
 
     public void setUploader(User uploader) {

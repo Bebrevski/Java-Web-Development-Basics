@@ -2,19 +2,19 @@ package metubev2.repository;
 
 import metubev2.domain.entity.Tube;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import java.util.List;
 
 public class TubeRepositoryImpl implements TubeRepository {
 
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
-    public TubeRepositoryImpl() {
-        this.entityManager = Persistence
-                .createEntityManagerFactory("metubev2")
-                .createEntityManager();
+    @Inject
+    public TubeRepositoryImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
+
 
     @Override
     public Tube save(Tube entity) {
@@ -30,7 +30,7 @@ public class TubeRepositoryImpl implements TubeRepository {
         this.entityManager.getTransaction().begin();
         List<Tube> allTubes = this.entityManager
                 .createQuery("" +
-                        "SELECT t FROM tubes AS t", Tube.class)
+                        "SELECT t FROM Tube AS t", Tube.class)
                 .getResultList();
         this.entityManager.getTransaction().commit();
 
@@ -42,7 +42,7 @@ public class TubeRepositoryImpl implements TubeRepository {
         this.entityManager.getTransaction().begin();
         Tube tubeEntity = this.entityManager
                 .createQuery("" +
-                        "SELECT t FROM tubes AS t " +
+                        "SELECT t FROM Tube AS t " +
                         "WHERE t.id = :id ", Tube.class)
                 .setParameter("id", id)
                 .getSingleResult();
@@ -57,7 +57,7 @@ public class TubeRepositoryImpl implements TubeRepository {
         long size = this.entityManager
                 .createQuery("" +
                         "SELECT count(t) " +
-                        "FROM tubes AS t", long.class)
+                        "FROM Tube AS t", long.class)
                 .getSingleResult();
         this.entityManager.getTransaction().commit();
         return size;

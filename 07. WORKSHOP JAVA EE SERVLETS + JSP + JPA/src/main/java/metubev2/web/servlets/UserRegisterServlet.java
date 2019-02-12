@@ -3,7 +3,7 @@ package metubev2.web.servlets;
 import metubev2.domain.models.binding.UserRegisterBindingModel;
 import metubev2.domain.models.service.UserServiceModel;
 import metubev2.service.UserService;
-import metubev2.util.Mapper;
+import org.modelmapper.ModelMapper;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -17,12 +17,12 @@ import java.io.IOException;
 public class UserRegisterServlet extends HttpServlet {
 
     private final UserService userService;
-    private final Mapper mapper;
+    private final ModelMapper modelMapper;
 
     @Inject
-    public UserRegisterServlet(UserService userService, Mapper mapper) {
+    public UserRegisterServlet(UserService userService, ModelMapper modelMapper) {
         this.userService = userService;
-        this.mapper = mapper;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -38,9 +38,10 @@ public class UserRegisterServlet extends HttpServlet {
         if (!userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())) {
             req.getRequestDispatcher("/jsp/register.jsp")
                     .forward(req, resp);
+            return;
         }
 
-        this.userService.registerUser(this.mapper.map(userRegisterBindingModel, UserServiceModel.class));
+        this.userService.registerUser(this.modelMapper.map(userRegisterBindingModel, UserServiceModel.class));
 
         resp.sendRedirect("/login");
     }

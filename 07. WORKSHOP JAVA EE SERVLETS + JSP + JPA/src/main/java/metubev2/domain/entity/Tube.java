@@ -1,11 +1,9 @@
 package metubev2.domain.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
-@Entity(name = "tubes")
+@Entity
+@Table(name = "tubes")
 public class Tube extends BaseEntity {
     private String title;
     private String author;

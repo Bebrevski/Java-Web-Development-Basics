@@ -29,7 +29,7 @@ public class UserRepositoryImpl implements UserRepository {
         this.entityManager.getTransaction().begin();
         List<User> allUsers = this.entityManager
                 .createQuery("" +
-                        "SELECT u FROM users AS u", User.class)
+                        "SELECT u FROM User AS u", User.class)
                 .getResultList();
         this.entityManager.getTransaction().commit();
 
@@ -41,7 +41,7 @@ public class UserRepositoryImpl implements UserRepository {
         this.entityManager.getTransaction().begin();
         User user = this.entityManager
                 .createQuery("" +
-                        "SELECT u FROM users AS u " +
+                        "SELECT u FROM User AS u " +
                         "WHERE u.id = :id ", User.class)
                 .setParameter("id", id)
                 .getSingleResult();
@@ -56,9 +56,31 @@ public class UserRepositoryImpl implements UserRepository {
         long size = this.entityManager
                 .createQuery("" +
                         "SELECT count(u) " +
-                        "FROM users AS u", long.class)
+                        "FROM User AS u", long.class)
                 .getSingleResult();
         this.entityManager.getTransaction().commit();
         return size;
+    }
+
+    @Override
+    public User findByUsernameAndPassword(String username, String password) {
+        this.entityManager.getTransaction().begin();
+
+        User user;
+        try{
+            user = this.entityManager.createQuery("" +
+                    "SELECT u " +
+                    "FROM User AS u " +
+                    "WHERE u.username = :username AND u.password = :password", User.class)
+                    .setParameter("username", username)
+                    .setParameter("password", password)
+                    .getSingleResult();
+        } catch (Exception e){
+            return null;
+        }
+
+        this.entityManager.getTransaction().commit();
+
+        return user;
     }
 }

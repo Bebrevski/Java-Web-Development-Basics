@@ -20,7 +20,7 @@
             <hr/>
             <div class="row">
                 <div class="col col-md-12 d-flex justify-content-center">
-                    <h3>Check you Tubes below</h3>
+                    <h3>Check all Tubes below</h3>
                 </div>
             </div>
             <hr/>

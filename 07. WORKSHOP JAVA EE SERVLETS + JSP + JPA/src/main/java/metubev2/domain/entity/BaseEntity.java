@@ -19,7 +19,7 @@ public class BaseEntity {
     @GenericGenerator(name = "uuid-string", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id", nullable = false, unique = true, updatable = false)
     public String getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(String id) {

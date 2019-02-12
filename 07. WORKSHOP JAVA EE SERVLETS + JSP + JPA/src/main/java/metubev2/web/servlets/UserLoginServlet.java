@@ -35,6 +35,7 @@ public class UserLoginServlet extends HttpServlet {
 
         if(!this.userService.loginUser(this.mapper.map(userLoginBindingModel, UserServiceModel.class))) {
             req.getRequestDispatcher("/jsp/login.jsp").forward(req, resp);
+            return;
         }
 
         req.getSession().setAttribute("username", userLoginBindingModel.getUsername());

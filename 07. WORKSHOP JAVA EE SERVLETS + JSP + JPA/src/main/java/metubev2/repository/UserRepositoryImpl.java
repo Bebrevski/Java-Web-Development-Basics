@@ -67,7 +67,7 @@ public class UserRepositoryImpl implements UserRepository {
         this.entityManager.getTransaction().begin();
 
         User user;
-        try{
+        try {
             user = this.entityManager.createQuery("" +
                     "SELECT u " +
                     "FROM User AS u " +
@@ -75,12 +75,12 @@ public class UserRepositoryImpl implements UserRepository {
                     .setParameter("username", username)
                     .setParameter("password", password)
                     .getSingleResult();
-        } catch (Exception e){
+
+            return user;
+        } catch (Exception e) {
             return null;
+        } finally {
+            this.entityManager.getTransaction().commit();
         }
-
-        this.entityManager.getTransaction().commit();
-
-        return user;
     }
 }

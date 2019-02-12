@@ -10,15 +10,30 @@
 
     <div class="collapse navbar-collapse justify-content-end row" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item active col-md-4">
-                <a class="nav-link h5" href="/">Home</a>
-            </li>
-            <li class="nav-item active col-md-4">
-                <a class="nav-link h5" href="/login">Login</a>
-            </li>
-            <li class="nav-item active col-md-4">
-                <a class="nav-link h5" href="/register">Register</a>
-            </li>
+            <% if(request.getSession().getAttribute("username") == null) {%>
+                <li class="nav-item active col-md-4">
+                    <a class="nav-link h5" href="/">Home</a>
+                </li>
+                <li class="nav-item active col-md-4">
+                    <a class="nav-link h5" href="/login">Login</a>
+                </li>
+                <li class="nav-item active col-md-4">
+                    <a class="nav-link h5" href="/register">Register</a>
+                </li>
+            <%} else { %>
+                <li class="nav-item active col-md-3">
+                    <a class="nav-link h5" href="/">Home</a>
+                </li>
+                <li class="nav-item active col-md-3">
+                    <a class="nav-link h5" href="/profile">Profile</a>
+                </li>
+                <li class="nav-item active col-md-3">
+                    <a class="nav-link h5" href="/upload-tube">Upload</a>
+                </li>
+                <li class="nav-item active col-md-3">
+                    <a class="nav-link h5" href="/logout">Logout</a>
+                </li>
+            <%}%>
         </ul>
     </div>
 </nav>

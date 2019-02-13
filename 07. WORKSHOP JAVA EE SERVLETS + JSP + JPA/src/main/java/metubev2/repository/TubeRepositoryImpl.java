@@ -39,16 +39,12 @@ public class TubeRepositoryImpl implements TubeRepository {
 
     @Override
     public Tube findById(String id) {
-        this.entityManager.getTransaction().begin();
-        Tube tubeEntity = this.entityManager
+        return this.entityManager
                 .createQuery("" +
                         "SELECT t FROM Tube AS t " +
                         "WHERE t.id = :id ", Tube.class)
                 .setParameter("id", id)
                 .getSingleResult();
-        this.entityManager.getTransaction().commit();
-
-        return tubeEntity;
     }
 
     @Override
@@ -61,5 +57,11 @@ public class TubeRepositoryImpl implements TubeRepository {
                 .getSingleResult();
         this.entityManager.getTransaction().commit();
         return size;
+    }
+
+    @Override
+    public Tube update(Tube tube) {
+        this.entityManager.merge(tube);
+        return tube;
     }
 }

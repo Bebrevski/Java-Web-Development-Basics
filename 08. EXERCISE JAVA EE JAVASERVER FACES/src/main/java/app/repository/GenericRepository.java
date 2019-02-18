@@ -8,4 +8,6 @@ public interface GenericRepository<E, ID> {
     List<E> findAll();
 
     E findById(ID id);
+
+    void remove(ID id);
 }

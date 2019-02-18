@@ -49,4 +49,15 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
         return employee;
     }
+
+    @Override
+    public void remove(String id) {
+        this.entityManager.getTransaction().begin();
+        this.entityManager.createQuery("" +
+                "DELETE FROM Employee AS e " +
+                "WHERE e.id = :id")
+                .setParameter("id", id)
+                .executeUpdate();
+        this.entityManager.getTransaction().commit();
+    }
 }

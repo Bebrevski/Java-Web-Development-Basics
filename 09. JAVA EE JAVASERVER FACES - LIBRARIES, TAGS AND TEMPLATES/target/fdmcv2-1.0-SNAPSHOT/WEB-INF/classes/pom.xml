@@ -56,13 +56,6 @@
             <version>LATEST</version>
         </dependency>
 
-        <!-- Dependency for importing templates-->
-        <!--<dependency>-->
-        <!--<groupId>javax.servlet</groupId>-->
-        <!--<artifactId>jstl</artifactId>-->
-        <!--<version>1.2</version>-->
-        <!--</dependency>-->
-
         <!--Dependency for pass hashing-->
         <dependency>
             <groupId>commons-codec</groupId>

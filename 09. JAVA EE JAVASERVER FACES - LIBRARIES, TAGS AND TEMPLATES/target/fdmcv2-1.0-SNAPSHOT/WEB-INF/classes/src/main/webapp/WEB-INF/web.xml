@@ -14,7 +14,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 
     <welcome-file-list>
 
-        <welcome-file>faces/jsf/index.xhtml</welcome-file>
+        <!--   faces == webapp   -->
+        <welcome-file>faces/view/index.xhtml</welcome-file>
 
     </welcome-file-list>
 

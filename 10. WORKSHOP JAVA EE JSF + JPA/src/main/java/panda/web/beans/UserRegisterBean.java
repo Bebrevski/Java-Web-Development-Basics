@@ -41,7 +41,7 @@ public class UserRegisterBean {
         if(!this.userRegisterBindingModel.getPassword().equals(this.userRegisterBindingModel.getConfirmPassword())) {
             FacesContext.getCurrentInstance()
                     .getExternalContext()
-                    .redirect("/faces/view/register.xhtml");
+                    .redirect("register.xhtml");
             return;
         }
 
@@ -52,6 +52,6 @@ public class UserRegisterBean {
 
         FacesContext.getCurrentInstance()
                 .getExternalContext()
-                .redirect("/faces/view/login.xhtml");
+                .redirect("login.xhtml");
     }
 }

@@ -17,6 +17,6 @@ public class UserLogoutBean {
 
         FacesContext.getCurrentInstance()
                 .getExternalContext()
-                .redirect("face/view/home.xhtml");
+                .redirect("index.xhtml");
     }
 }

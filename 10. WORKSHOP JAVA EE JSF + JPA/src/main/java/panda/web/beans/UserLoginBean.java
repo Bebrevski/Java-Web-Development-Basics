@@ -7,6 +7,7 @@ import panda.service.UserService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -22,6 +23,7 @@ public class UserLoginBean {
     public UserLoginBean() {
     }
 
+    @Inject
     public UserLoginBean(UserService userService, ModelMapper modelMapper) {
         this.userService = userService;
         this.modelMapper = modelMapper;
@@ -45,7 +47,7 @@ public class UserLoginBean {
         if(userServiceModel == null) {
             FacesContext.getCurrentInstance()
                     .getExternalContext()
-                    .redirect("faces/view/login.xhtml");
+                    .redirect("login.xhtml");
 
             return;
         }
@@ -60,6 +62,6 @@ public class UserLoginBean {
 
         FacesContext.getCurrentInstance()
                 .getExternalContext()
-                .redirect("faces/view/home.xhtml");
+                .redirect("home.xhtml");
     }
 }

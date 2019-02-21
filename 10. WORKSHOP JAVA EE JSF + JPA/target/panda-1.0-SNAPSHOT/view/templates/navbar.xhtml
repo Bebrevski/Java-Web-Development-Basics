@@ -12,15 +12,16 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-panda">
             <h:link class="navbar-brand nav-link-white" value="PANDA" outcome="index"/>
             <!-- old -> <button> -->
-            <h:commandButton class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"/>
+            <!--<h:commandButton class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"/>-->
             <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
                 <ul class="navbar-nav">
                 </ul>
+
                 <c:choose>
                     <c:when test="#{session.getAttribute('role') == 'Admin'}">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link nav-link-white active" href="/pending">Pending</a>
+                                <h:link value="Pending" class="nav-link nav-link-white active" outcome="pending"/>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link nav-link-white active" href="/shipped">Shipped</a>
@@ -29,14 +30,18 @@
                                 <a class="nav-link nav-link-white active" href="/delivered">Delivered</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link nav-link-white active" href="/package">Package</a>
+                                <h:link class="nav-link nav-link-white active" outcome="create-package"
+                                        value="Packages"/>
                             </li>
                         </ul>
                     </c:when>
                 </c:choose>
+
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <h:link class="nav-link nav-link-white active" value="Home" outcome="index"/>
+                        <!-- If user is present in session, Home button to load home.xhtml-->
+                        <!-- else load index.xhtml-->
+                        <h:link class="nav-link nav-link-white active" value="Home" outcome="home"/>
                     </li>
 
                     <c:choose>
@@ -54,7 +59,7 @@
                             </li>
                             <li class="nav-item">
                                 <h:form>
-                                    <h:commandButton action="#{userLogoutBean.logout}" class="nav-link nav-link-white active" value="Logout"/>
+                                    <h:commandLink action="#{userLogoutBean.logout}" class="nav-link nav-link-white active" value="Logout"/>
                                 </h:form>
                             </li>
                         </c:otherwise>

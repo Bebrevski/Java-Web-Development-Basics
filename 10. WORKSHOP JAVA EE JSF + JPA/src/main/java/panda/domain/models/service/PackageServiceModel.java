@@ -5,6 +5,7 @@ import panda.domain.entity.Status;
 import java.time.LocalDateTime;
 
 public class PackageServiceModel {
+    private String id;
     private String description;
     private Double weight;
     private String shippingAddress;
@@ -13,6 +14,14 @@ public class PackageServiceModel {
     private UserServiceModel recipient;
 
     public PackageServiceModel() {
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getDescription() {

@@ -7,6 +7,8 @@ import panda.domain.models.service.PackageServiceModel;
 import panda.repository.PackageRepository;
 
 import javax.inject.Inject;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,5 +37,23 @@ public class PackageServiceImpl implements PackageService {
                 .stream()
                 .map(p -> this.modelMapper.map(p, PackageServiceModel.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void packageStatusChange(String id) {
+        Package aPackage = this.packageRepository.findById(id);
+        this.changeStatus(aPackage);
+        this.changeDeliveryDate(aPackage);
+
+        this.packageRepository.updatePackage(aPackage);
+    }
+
+    private void changeDeliveryDate(Package aPackage) {
+        long days = (System.currentTimeMillis() % 21) + 20;
+        aPackage.setEstimatedDeliveryTime(LocalDateTime.now().plusDays(days));
+    }
+
+    private void changeStatus(Package aPackage) {
+        aPackage.setStatus(Status.values()[Arrays.asList(Status.values()).indexOf(aPackage.getStatus()) + 1]);
     }
 }

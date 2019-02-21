@@ -52,7 +52,7 @@ public class PendingPackagesBean {
     }
 
     public void changeStatus(String id) throws IOException {
-        
+        this.packageService.packageStatusChange(id);
 
         FacesContext.getCurrentInstance().getExternalContext()
                 .redirect("pending.xhtml");

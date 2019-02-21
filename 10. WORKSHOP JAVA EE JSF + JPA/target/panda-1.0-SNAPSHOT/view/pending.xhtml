@@ -33,7 +33,9 @@
                             <td class="col-lg-3 d-flex justify-content-center"><h5>#{aPackage.shippingAddress}</h5></td>
                             <td class="col-lg-2 d-flex justify-content-center"><h5>#{aPackage.recipient}</h5></td>
                             <td class="col-lg-1 d-flex justify-content-center">
-                                <h:link class="btn bg-panda text-white">Ship</h:link>
+                                <h:form>
+                                    <h:commandButton action="#{pendingPackagesBean.changeStatus(aPackage.id)}" class="btn bg-panda text-white" value="Ship"/>
+                                </h:form>
                             </td>
                         </tr>
                     </ui:repeat>

@@ -9,4 +9,6 @@ public interface PackageService {
     void packageCreate(PackageServiceModel packageServiceModel);
 
     List<PackageServiceModel> findAllPackagesByStatus(Status status);
+
+    void packageStatusChange(String id);
 }

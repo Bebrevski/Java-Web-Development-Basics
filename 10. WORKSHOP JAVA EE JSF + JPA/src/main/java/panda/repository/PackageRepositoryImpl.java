@@ -61,4 +61,13 @@ public class PackageRepositoryImpl implements PackageRepository {
                 .setParameter("status", status)
                 .getResultList();
     }
+
+    @Override
+    public Package updatePackage(Package entity) {
+        this.entityManager.getTransaction().begin();
+        Package updated = this.entityManager.merge(entity);
+        this.entityManager.getTransaction().commit();
+
+        return updated;
+    }
 }

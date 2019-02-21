@@ -1,11 +1,14 @@
 package panda.domain.models.service;
 
+import java.util.List;
+
 public class UserServiceModel {
     private String id;
     private String username;
     private String password;
     private String email;
     private String role;
+    private List<PackageServiceModel> packages;
 
     public UserServiceModel() {
     }
@@ -48,5 +51,13 @@ public class UserServiceModel {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public List<PackageServiceModel> getPackages() {
+        return this.packages;
+    }
+
+    public void setPackages(List<PackageServiceModel> packages) {
+        this.packages = packages;
     }
 }

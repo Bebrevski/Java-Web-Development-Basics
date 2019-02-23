@@ -45,4 +45,14 @@ public class JobApplicationServiceImpl implements JobApplicationService {
                 })
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public JobApplicationServiceModel getJobById(String id) {
+        return this.modelMapper.map(this.jobApplicationRepository.findById(id), JobApplicationServiceModel.class);
+    }
+
+    @Override
+    public void delete(String id) {
+        this.jobApplicationRepository.delete(id);
+    }
 }

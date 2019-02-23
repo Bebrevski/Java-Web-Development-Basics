@@ -49,4 +49,15 @@ public class JobApplicationRepositoryImpl implements JobApplicationRepository {
                         "SELECT count(j) FROM JobApplication AS j ", Long.class)
                 .getSingleResult();
     }
+
+    @Override
+    public void delete(String id) {
+        this.entityManager.getTransaction().begin();
+        this.entityManager
+                .createQuery("" +
+                        "DELETE FROM JobApplication j WHERE j.id = :id ")
+                .setParameter("id", id)
+                .executeUpdate();
+        this.entityManager.getTransaction().commit();
+    }
 }

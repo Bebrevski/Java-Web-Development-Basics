@@ -26,7 +26,6 @@ public class JobApplicationListBean {
     public JobApplicationListBean(JobApplicationService jobApplicationService, ModelMapper modelMapper) {
         this.jobApplicationService = jobApplicationService;
         this.modelMapper = modelMapper;
-        this.init();
     }
 
     @PostConstruct

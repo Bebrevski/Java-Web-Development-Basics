@@ -49,13 +49,17 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User findById(String id) {
-        return this.entityManager
-                .createQuery("" +
-                        "SELECT u " +
-                        "FROM User  AS u " +
-                        "WHERE u.id = :id", User.class)
-                .setParameter("id", id)
-                .getSingleResult();
+        try {
+            return this.entityManager
+                    .createQuery("" +
+                            "SELECT u " +
+                            "FROM User  AS u " +
+                            "WHERE u.id = :id", User.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override

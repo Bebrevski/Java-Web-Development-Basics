@@ -47,6 +47,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserServiceModel findUserByUsername(String username) {
         return this.modelMapper.map(this.userRepository.findByUsername(username), UserServiceModel.class);
+
+        //can return null
     }
 
     @Override

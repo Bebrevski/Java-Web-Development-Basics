@@ -42,7 +42,7 @@ public class UserRegisterBean extends BaseBean{
 
     public void register(){
 //        if (!this.model.getPassword().equals(this.model.getConfirmPassword())){
-//            this.redirect("register");
+//            this.redirect("register"); //ForPrettyFaces may need to be "/register" and so on
 //            return;
 //        }
 //

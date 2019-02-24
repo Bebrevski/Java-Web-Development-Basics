@@ -41,15 +41,15 @@ public class UserRegisterBean extends BaseBean{
     }
 
     public void register(){
-//        if (!this.model.getPassword().equals(this.model.getConfirmPassword())){
-//            this.redirect("register"); //ForPrettyFaces may need to be "/register" and so on
-//            return;
-//        }
-//
-//        if (!this.userService.registerUser(this.modelMapper.map(this.model, UserServiceModel.class))){
-//            throw new IllegalArgumentException("SOMETHING WENT WRONG!!!!!!!!!!!!!!!!!!");
-//        }
-//
-//        this.redirect("login");
+        if (!this.model.getPassword().equals(this.model.getConfirmPassword())){
+            this.redirect("register"); //ForPrettyFaces may need to be "/register" and so on
+            return;
+        }
+
+        if (!this.userService.registerUser(this.modelMapper.map(this.model, UserServiceModel.class))){
+            throw new IllegalArgumentException("SOMETHING WENT WRONG!!!!!!!!!!!!!!!!!!");
+        }
+
+        this.redirect("login");
     }
 }

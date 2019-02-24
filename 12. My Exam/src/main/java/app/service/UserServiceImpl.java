@@ -22,33 +22,35 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean registerUser(UserServiceModel userServiceModel) {
-//        User user = this.modelMapper.map(userServiceModel, User.class);
-//        user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
-//
-//        if (this.userRepository.save(user) == null) {
-//            return false;
-//        }
+        User user = this.modelMapper.map(userServiceModel, User.class);
+        user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
+
+        if (this.userRepository.save(user) == null) {
+            return false;
+        }
 
         return true;
     }
 
     @Override
     public UserServiceModel loginUser(UserServiceModel userServiceModel) {
-//        User user = this.userRepository.findByUsername(userServiceModel.getUsername());
-//        if (user == null || !DigestUtils.sha256Hex(userServiceModel.getPassword()).equals(user.getPassword())) {
-//            return null;
-//        }
-//
-//        return this.modelMapper.map(user, UserServiceModel.class);
+        User user = this.userRepository.findByUsername(userServiceModel.getUsername());
+        if (user == null || !DigestUtils.sha256Hex(userServiceModel.getPassword()).equals(user.getPassword())) {
+            return null;
+        }
 
-        return new UserServiceModel(); // <-- DELETE THIS ROW!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        return this.modelMapper.map(user, UserServiceModel.class);
     }
 
     @Override
     public UserServiceModel findUserByUsername(String username) {
-        return this.modelMapper.map(this.userRepository.findByUsername(username), UserServiceModel.class);
+        UserServiceModel userServiceModel = this.modelMapper.map(this.userRepository.findByUsername(username), UserServiceModel.class);
 
-        //can return null
+        if (userServiceModel == null) {
+            throw new IllegalArgumentException("Something went wrong!");
+        }
+
+        return userServiceModel;
     }
 
     @Override

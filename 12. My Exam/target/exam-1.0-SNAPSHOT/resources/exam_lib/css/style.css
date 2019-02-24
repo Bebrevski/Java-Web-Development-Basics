@@ -1,11 +1,15 @@
-.bg-sboj {
-	background-color: #606060;
+.bg-exodia {
+    background-color: #191970;
 }
 
-.w-15 {
-	width: 15%;
+.text-exodia {
+    color: #191970;
+}
+
+.hr-2 {
+    height: 2px;
 }
 
 textarea {
-	resize: none;
+    resize: none;
 }

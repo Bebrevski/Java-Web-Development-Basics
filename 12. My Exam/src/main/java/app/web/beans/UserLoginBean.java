@@ -44,24 +44,24 @@ public class UserLoginBean extends BaseBean {
     }
 
     public void login() {
-//        UserServiceModel userServiceModel = this.userService
-//                .loginUser(this.modelMapper.map(model, UserServiceModel.class));
-//
-//        if (userServiceModel == null){
-//            this.redirect("login");
-//            return;
-//        }
-//
-//        HttpServletRequest request = (HttpServletRequest) FacesContext
-//                .getCurrentInstance()
-//                .getExternalContext()
-//                .getRequest();
-//
-//        HttpSession session = request.getSession();
-//
-//        session.setAttribute("username", userServiceModel.getUsername());
-//        session.setAttribute("id", userServiceModel.getId());
-//
-//        this.redirect("home");
+        UserServiceModel userServiceModel = this.userService
+                .loginUser(this.modelMapper.map(model, UserServiceModel.class));
+
+        if (userServiceModel == null){
+            this.redirect("login");
+            return;
+        }
+
+        HttpServletRequest request = (HttpServletRequest) FacesContext
+                .getCurrentInstance()
+                .getExternalContext()
+                .getRequest();
+
+        HttpSession session = request.getSession();
+
+        session.setAttribute("username", userServiceModel.getUsername());
+        session.setAttribute("id", userServiceModel.getId());
+
+        this.redirect("home");
     }
 }
